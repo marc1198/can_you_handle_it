@@ -1,0 +1,7 @@
+Stream: Color
+Frame Counter: 8245928667859910656
+Frame Timestamp: 129576781
+Time Of Arrival: 1686919392254
+Backend Timestamp: 1686919392223
+Actual Fps: 29
+Raw Frame Size: 614400

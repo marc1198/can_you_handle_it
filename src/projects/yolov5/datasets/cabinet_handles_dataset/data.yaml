@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 2
+names: ['cabinet_door', 'handle']
+
+roboflow:
+  workspace: robotvision
+  project: combined_dataset-7uqnu
+  version: 8
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/robotvision/combined_dataset-7uqnu/dataset/8

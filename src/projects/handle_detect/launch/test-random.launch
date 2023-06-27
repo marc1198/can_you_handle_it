@@ -1,0 +1,9 @@
+<launch>
+  <node pkg="tf" type="static_transform_publisher" name="cam_base_link" args="0 -2 2 0 1.57 1.57 /map /cam 10"/>
+  <node name="segmentation" pkg="handle_detect" type="segmentation.py" output="screen"/>
+  <node name="clustering" pkg="handle_detect" type="clustering.py" output="screen"/>
+  <node name="CNN" pkg="yolov5" type="ros_recognition_yolo.py" output="screen"/>
+  <node name="test_images" pkg="handle_detect" type="pub_ex_image.py" output="screen"/>
+  <node name="handle_calc" pkg="handle_detect" type="gripper_pos.py" output="screen"/>
+
+</launch>

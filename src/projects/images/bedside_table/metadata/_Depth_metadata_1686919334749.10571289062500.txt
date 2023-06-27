@@ -1,0 +1,7 @@
+Stream: Depth
+Frame Counter: 7526764457477799936
+Frame Timestamp: 72097484
+Time Of Arrival: 1686919334757
+Backend Timestamp: 1686919334750
+Actual Fps: 29
+Raw Frame Size: 814080
