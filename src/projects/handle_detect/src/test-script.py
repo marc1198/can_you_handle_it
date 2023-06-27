@@ -20,15 +20,15 @@ import rosnode
 from functools import partial
 import numpy as np
 
-config = '/beside_table_db_CNN/'
+config = '/2dbscan_CNN/'
 image_directory = '/home/clemi/catkin_ws/src/projects/images/'
 folders = ['all_false', 'bedside_table', 'kitchen_1', 'kitchen_2', 'test_images']
-used_folder = 1
+used_folder = 4
 focal_len = 1.93 # 1.93 mm
 max_frames = 30
 
 bridge = CvBridge()
-image_counter = 2 # 0 2 3 5 6 7 8 9 11 12
+image_counter = 0 # 0 2 3 5 6 7 8 9 11 12
 rgb_images = []
 depth_images = []
 not_existing_ids = []
@@ -50,7 +50,7 @@ def publishImage(time_last_changes):
 
     image = rgb_images[image_counter]
     idx = re.findall(r'\d+', image)
-    depth_image_name = idx[0] + '.jpg'
+    depth_image_name = idx[0] + '_depth.png'
 
     rgb_image_path = image_directory + folders[used_folder] + '/color/' + image
     depth_folder_path = image_directory + folders[used_folder] + '/depth/'
@@ -154,7 +154,7 @@ def Init():
     for i, img in enumerate(rgb_images): 
         # Find the corresponding depth images
         idx = re.findall(r'\d+', img)
-        depth_image_name = idx[0] + '.jpg'
+        depth_image_name = idx[0] + '_depth.png'
         depth_image_path = depth_folder_path + depth_image_name
 
         if not ( os.path.isfile(rgb_folder_path+img) and (img.endswith('png') or img.endswith('JPG') or img.endswith('jpg'))and os.path.isfile(depth_image_path)):

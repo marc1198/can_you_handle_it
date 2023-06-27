@@ -38,7 +38,7 @@ got_CNN = False
 
 
 use_CNN = True
-use_CV = False
+use_CV = True
 resolution_rect = 50 # Number of steps a can be on a scale from 0 to square
 resolution_alpha = 5 # Resolution the handle-angle can be (for saving computing power)
 fitting_margin = 1.0 #1.0 # 100.0

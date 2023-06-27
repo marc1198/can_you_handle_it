@@ -32,7 +32,7 @@ from handle_detect.msg import CNN, clustering
 
 
 
-segmentation_mode = "ppo" # "dbscan" # "g_means" # "it_kmeans" # "ppo" # "k_means_2" # "k_means_3"
+segmentation_mode = "dbscan" # "dbscan" # "g_means" # "it_kmeans" # "ppo" # "k_means_2" # "k_means_3"
 ransac_inlier_threshold = 0.75 # 10.0
 ransac_needed_confidence = 0.90
 ransac_num_iterations = 100
