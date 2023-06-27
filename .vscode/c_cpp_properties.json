@@ -10,6 +10,9 @@
         "/opt/ros/noetic/include/**",
         "/home/clemi/catkin_ws/src/projects/handle_detect/include/**",
         "/home/clemi/catkin_ws/src/projects/yolov5/include/**",
+        "/catkin_ws/devel/include/**",
+        "/catkin_ws/src/projects/handle_detect/include/**",
+        "/catkin_ws/src/projects/yolov5/include/**",
         "/usr/include/**"
       ],
       "name": "ROS",

@@ -43,7 +43,7 @@ class Camera_subscriber():
         self.publisher = rospy.Publisher('bounding_boxes', Float32MultiArray, queue_size=10)
 
 
-        self.weights='training_result_peter/exp3/weights/best.pt'  # model.pt path(s)
+        self.weights='/catkin_ws/src/projects/yolov5/src/training_result_peter/exp3/weights/best.pt'  # model.pt path(s)
         self.imgsz=(640, 640)  # inference size (pixels) # (640, 480)
         self.conf_thres=0.25  # confidence threshold
         self.iou_thres=0.45  # NMS IOU threshold
@@ -62,7 +62,7 @@ class Camera_subscriber():
         self.data= 'data/coco128.yaml'  # dataset.yaml path
         self.half=False  # use FP16 half-precision inference
         self.augment=False  # augmented inferenc
-        self.img_path = '../datasets/cabinet_handles_dataset/test/images/00035_jpg.rf.765aad722538e0eba1523748775d80e4.jpg'
+        self.img_path = '/catkin_ws/src/projects/yolov5/datasets/cabinet_handles_dataset/test/images/00035_jpg.rf.765aad722538e0eba1523748775d80e4.jpg'
         self.subscribed_camera = False
         self.img = None
 
