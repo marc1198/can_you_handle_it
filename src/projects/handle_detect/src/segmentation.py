@@ -123,7 +123,8 @@ def publishAsPC2(cabinets_rgb, cabinets_depth, x_offset, y_offset, x_top, y_top,
     id_h = 0
     table_id_c_k = []
     table_id_h_k = []
-
+    pcd_list = []
+    
     rgb_img_cv2 = rgb_image[0]
     msg = CNN()
     for k in range(len(cabinets_rgb)):
@@ -133,6 +134,9 @@ def publishAsPC2(cabinets_rgb, cabinets_depth, x_offset, y_offset, x_top, y_top,
 
             msg_pointcloud = rgbd_to_pc2(img, depth, rgb_img_cv2.shape, x_offset[k], y_offset[k])
             # print(msg_pointcloud)
+
+            #For Marc
+            pcd_list.append(msg_pointcloud)
 
             # print("Published",k,"th Pointcloud in Image. Using",zoom,"x zoom")
             if (classes[k] == class_cabinet):
@@ -144,6 +148,12 @@ def publishAsPC2(cabinets_rgb, cabinets_depth, x_offset, y_offset, x_top, y_top,
                 msg.ids.append(-1)
                 table_id_h_k.append(k)
                 id_h = id_h +1
+
+    # For Marc
+    for i, pc2 in enumerate(pcd_list):
+        name = 'pc2_from_CNN' + str(i)
+        fitted_pcd = rospy.Publisher(name, PointCloud2, queue_size = 5)
+        fitted_pcd.publish(pc2)
 
     for h in range(id_h):
         for c in range(id_c):
