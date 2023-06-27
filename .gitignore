@@ -49,3 +49,6 @@ qtcreator-*
 
 # Catkin custom files
 CATKIN_IGNORE
+
+# Manually added
+src/projects/yolov5/src/runs # Make sure the runs don't get tracked
