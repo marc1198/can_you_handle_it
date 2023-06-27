@@ -1,0 +1,49 @@
+FROM osrf/ros:noetic-desktop-full
+
+RUN apt-get update && apt-get install -y \
+    python3-catkin-tools python3-osrf-pycommon python3-tk python3-pip tmux nano git clang-tidy clang-format
+RUN ln -s /usr/bin/python3 /usr/bin/python
+
+###### Install PyTorch and other dependencies ######
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip3 install --no-cache-dir torch torchvision
+RUN apt-get update && apt-get install -y \
+    python3-catkin-tools python3-osrf-pycommon python3-tk python3-pip tmux nano git clang-tidy clang-format
+
+# ROS, Open3D etc.
+WORKDIR /catkin_ws
+RUN echo 'source /opt/ros/noetic/setup.bash' >> ~/.bashrc
+RUN mkdir -p src
+RUN /bin/bash -c 'source /opt/ros/noetic/setup.bash && catkin_make'
+RUN echo 'source /catkin_ws/devel/setup.bash' >> ~/.bashrc
+RUN apt-get update && apt-get install -y git
+RUN python3 -m pip install scipy
+RUN python3 -m pip install -U scikit-learn
+RUN python3 -m pip install open3d
+
+###### Install Yolov5 #######
+CMD ["/bin/bash"]
+
+# Get Yolov5
+WORKDIR /
+RUN apt-get update && apt-get install -y git
+WORKDIR /catkin_ws/src/projects/yolov5
+# Not necessary right now, because the folder is there by Marc: RUN git clone https://github.com ultralytics/yolov5  # Clone YOLOv5 repository
+#RUN pip install -r requirements.txt  # Install Python dependencies
+
+# RealSense
+# RUN apt-get update && apt-get install -y \
+#     librealsense2-dev \
+#     librealsense2-dkms \
+#     librealsense2-utils
+
+RUN apt-get install ros-noetic-realsense2-camera -y
+
+# ToDo: Peter fragen warum der 'rvizweb'-Ordner noch immer da ist, beim neu builden
+
+WORKDIR /catkin_ws
+CMD ["/bin/bash"]
+

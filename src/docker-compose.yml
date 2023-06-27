@@ -1,0 +1,52 @@
+
+
+version: '3'
+services:
+  novnc:
+    image: theasp/novnc:latest
+    ports:
+      - 8080:8080
+    environment:
+      - DISPLAY_WIDTH=1920
+      - DISPLAY_HEIGHT=1080
+      - RUN_XTERM=no
+    networks:
+      - ros
+
+
+  roscore:
+    depends_on:
+      - novnc
+    image: ros1_base
+    build:
+      context: .
+      dockerfile: Dockerfile_including_yolo
+    command: roscore
+    networks:
+      - ros
+
+  rosclient:
+    depends_on:
+      - novnc
+      - roscore
+    image: ros1_base
+    shm_size: 1g
+    build:
+      context: .
+      dockerfile: Dockerfile_including_yolo
+    environment:
+      - DISPLAY=novnc:0.0
+      - ROS_MASTER_URI=http://roscore:11311
+    networks:
+      - ros
+    volumes:
+      # - '/home/clemens/projects/final_RV/projects:/catkin_ws/src'
+      - "./projects:/catkin_ws/src/projects:rw" # In this case "../can_you_handle_it" is the relative path to the git repository - you might need to change that
+      - "/dev:/dev"
+    privileged: true
+    stdin_open: true
+    tty: true
+
+
+networks:
+  ros:
